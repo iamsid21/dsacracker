@@ -281,7 +281,7 @@ export default function Topic({ data, updateData }) {
 			dataField: 'id',
 			text: 'id',
 			headerStyle: { width: '40px', fontSize: '20px', textAlign: 'center' },
-			style: { fontSize: '20px', cursor: 'pointer', textAlign: 'center' },
+			style: { fontSize: '20px', cursor: 'pointer', textAlign: 'center', color:'white' },
 			events: {
 				onClick: (e, column, columnIndex, row, rowIndex) => {
 					handleSelect(row, !row._is_selected);
@@ -533,7 +533,7 @@ function RandomButton({ data }) {
 		>
 			Pick Random{' '}
 			<span role='img' aria-label='woman-juggling-emoji' className='emojiFix'>
-				🤹🏻‍♀️
+				
 			</span>
 		</Button>
 	);

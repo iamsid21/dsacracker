@@ -9,17 +9,13 @@ import About from './components/About/About';
 import Footer from './components/Footer/Footer';
 import ReactGA from 'react-ga';
 import './App.css';
-
 // Creating a theme context
 export const ThemeContext = createContext(null);
-
 function App() {
 	// setting state for data received from the DB
 	const [questionData, setquestionData] = useState([]);
-
 	// if dark theme is enabled or not
 	const [dark, setDark] = useState(false);
-
 	// useEffect for fetching data from DB on load and init GA
 	useEffect(() => {
 		localStorage.removeItem('cid');
@@ -28,7 +24,6 @@ function App() {
 		getData((QuestionData) => {
 			setquestionData(QuestionData);
 		});
-
 		//implementing dark theme mode option
 		// checking if dark mode "isDark" is already declared or not
 		if (!('isDark' in window.localStorage)) {
@@ -43,7 +38,6 @@ function App() {
 			}
 		}
 	}, []);
-
 	//to update progress in '/' route and also update DB
 	function updateData(key, topicData, topicPosition) {
 		let reGenerateUpdatedData = questionData.map((topic, index) => {
@@ -56,7 +50,6 @@ function App() {
 		});
 		setquestionData(reGenerateUpdatedData);
 	}
-
 	// reset and clear DB
 	function resetData() {
 		resetDBData((response) => {
@@ -64,9 +57,7 @@ function App() {
 			window.location.replace(window.location.origin);
 		});
 	}
-
 	// export 450DSA-Progress data
-
 	function exportData(callback) {
 		exportDBData((data) => {
 			const fileData = JSON.stringify(data);
@@ -75,38 +66,19 @@ function App() {
 			callback();
 		});
 	}
-
 	// import 450DSA-Progress data
-
 	function importData(data, callback) {
 		importDBData(data, (QuestionData) => {
 			setquestionData(QuestionData);
 			callback();
 		});
 	}
-
 	return (
 		<Router>
 			<div className={dark ? 'App dark' : 'App'}>
-			{/* <div 
-			className='banner'
-			style={
-				{
-					display:'flex', 
-					justifyContent:'center', 
-					alignItems:'center',
-					height:'50px',
-					boxShadow: 'rgba(0 0 0 / 10%) 0 4px 12px'
-				}
-			}>
-				<a href="https://bit.ly/3Rk01x9" target="_blank">
-					Register for the Free scholarship test to avail Free coding courses | Apply Now!
-				</a>
-			</div> */}
 				<h1 className='app-heading text-center mt-5' style={{ color: dark ? 'white' : '' }}>
 					450 DSA Cracker
 				</h1>
-
 				{questionData.length === 0 ? (
 					// load spinner until data is fetched from DB
 					<div className='d-flex justify-content-center'>
@@ -128,7 +100,6 @@ function App() {
 									></About>
 								}
 							/>
-
 							{/* TOPIC ROUTE */}
 							<Route path='/array' children={<Topic data={questionData[0]} updateData={updateData} />} />
 							<Route path='/matrix' children={<Topic data={questionData[1]} updateData={updateData} />} />
@@ -153,5 +124,4 @@ function App() {
 		</Router>
 	);
 }
-
 export default App;
